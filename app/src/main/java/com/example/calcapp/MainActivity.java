@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -30,9 +31,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void toastMake(String message) {
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        toast.show();
+    }
 
     @Override
     public void onClick(View v) {
+
+        try {
 
         EditText editText1 = (EditText)findViewById(R.id.editText1);
         String s = editText1.getText().toString();
@@ -44,24 +51,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         double sum = 0;
 
-        switch (v.getId()) {
-            case R.id.button1:
-                sum = num1 + num2;
-                break;
-            case R.id.button2:
-                sum = num1 - num2;
-                break;
-            case R.id.button3:
-                sum = num1 * num2;
-                break;
-            case R.id.button4:
-                sum = num1 / num2;
-                break;
+            switch (v.getId()) {
+                case R.id.button1:
+                    sum = num1 + num2;
+                    break;
+                case R.id.button2:
+                    sum = num1 - num2;
+                    break;
+                case R.id.button3:
+                    sum = num1 * num2;
+                    break;
+                case R.id.button4:
+                    sum = num1 / num2;
+                    break;
+                default:
+                    break;
+            }
+
+            Intent intent = new Intent(this, SecondActivity.class);
+            intent.putExtra("VALUE1", sum);
+            startActivity(intent);
+
+        } catch (NumberFormatException e) {
+            toastMake("正しい数値を入力してください");
         }
-
-        Intent intent = new Intent(this, SecondActivity.class);
-        intent.putExtra("VALUE1", sum);
-        startActivity(intent);
-
     }
 }

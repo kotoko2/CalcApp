@@ -15,9 +15,10 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         Intent intent = getIntent();
-        double num = intent.getDoubleExtra("VALUE1",0);
+        double sum = intent.getDoubleExtra("VALUE1",0);
 
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(String.valueOf(num));
+            TextView textView = (TextView) findViewById(R.id.textView);
+            textView.setText(String.valueOf(sum));
+
     }
 }
